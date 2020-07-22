@@ -41,11 +41,12 @@ module OmniAuth
       end
 
       def callback_url
-        if @authorization_code_from_signed_request
+        callback_url = if @authorization_code_from_signed_request
           ''
         else
           options[:callback_url] || super
         end
+        callback_url.split("?").first
       end
     end
   end
