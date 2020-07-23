@@ -14,9 +14,8 @@ module OmniAuth
 
       info do
         {
-          'uid'   => raw_info['account_id'],
-          'name'  => raw_info['name']['display_name'],
-          'email' => raw_info['email']
+          'uid'   => raw_info['team_id'],
+          'name'  => raw_info['name']
         }
       end
 
@@ -31,7 +30,7 @@ module OmniAuth
           faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
         end
         response = conn.post do |req|
-          req.url '/2/users/get_current_account'
+          req.url '/2/team/get_info'
           req.headers['Content-Type'] = 'application/json'
           req.headers['Authorization'] = "Bearer #{access_token.token}"
           req.body = "null"
